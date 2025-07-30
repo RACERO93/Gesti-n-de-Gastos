@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Registro</title>
+
+
+  
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+   .container {
+    width: 400px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+  }
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      margin-top: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    .error {
+      color: red;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    p {
+      margin-top: 15px;
+    }
+
+    a {
+      color: #4CAF50;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+
+
+
+<body>
+  <div class="container">
+    
+      <center> <img src="logo.png" width="80" height="100px" alt="SGG" class="d-block w-10" top ="50" > </center> 
+             <!-- <img src="logo.png" style="width:70px;"> -->
+  <h2>Registrar Usuario</h2>
+  <form id="registerForm">
+    <input type="text" id="nombre" placeholder="Nombre" required><br>
+    <input type="email" id="correo" placeholder="Correo" required><br>
+    <input type="password" id="contraseña" placeholder="Contraseña" required><br>
+     <input type="password" id="confirmarContrasena" placeholder="Confirmar contraseña" required>
+    <div class="error" id="mensajeError"></div>
+    <button type="submit">Registrar</button>
+  </form>
+  <p>¿Ya tienes cuenta? <a href="iniciarSesion.html">Inicia sesión</a></p>
+
+  <script src="registerUser.js"></script>
+</body>
+</html>

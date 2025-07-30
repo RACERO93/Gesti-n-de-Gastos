@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Perfil</title>
+</head>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', monospace;
+      background-color:#a7e5e29c;
+      color: #00ffcc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-image: radial-gradient(#f0f7f511 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    h2 {
+      color: #ffffff;
+      text-shadow:0 0 10px #080808;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background: #ffffff;
+      border: 2px solid #00ffcc;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #00ffcc88;
+      width: 300px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #00ffcc;
+      background-color: #ffffff;
+      color: #00ffcc;
+      border-radius: 5px;
+      font-family: 'Courier New', monospace;
+      font-size: 1em;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #ffffff;
+      color: #024f0c;
+      border: none;
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 0 10px #95a991;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #000;
+      color: #00ffcc;
+      border: 1px solid #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+
+    a {
+      color: #0c0c0c;
+      margin-top: 10px;
+      text-decoration: none;
+      display: inline-block;
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #0c0c0c;
+      text-shadow: 0 0 5px #058837;
+    }
+
+    .eliminar-btn {
+      margin-top: 15px;
+      background: #ff0033;
+      color: #fff;
+      box-shadow: 0 0 10px #ff0033;
+    }
+
+    .eliminar-btn:hover {
+      background: #f1efef;
+      color: #ff0033;
+      border: 1px solid #ff0033;
+      box-shadow: 0 0 15px #ff0033;
+    }
+  </style>
+
+<body>
+  <center><img src="logo.png" width="80" height="100px" alt="JHJ"></center>
+  <h2>Editar Perfil</h2>
+  <form id="perfilForm" >
+    
+    <input type="text" id="nombre" name="nombre" placeholder="Escribe tu nombre" required><br>
+    <input type="email" id="correo" correo="correo" placeholder="Escribe tu correo "><br>
+    <input type="password" id="contraseña" contraseña="contraseña" placeholder="Escribe tu contraseña" required><br> 
+    <button type="submit">Guardar Cambios</button>
+  </form>
+  <br>
+ <button id="eliminarUsuario">Eliminar cuenta</button>
+  <a href="menu.html">Volver</a>
+
+  <script src="perfil.js"></script>
+ <!-- <script src="ruta.js"></script> -->
+  
+</body>
+</html>

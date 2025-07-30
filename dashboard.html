@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard de Gastos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background-color: #e8f2fc;
+      margin: 0;
+      background: linear-gradient( 50%, rgb(107, 240, 240) 77%);
+    font-family: Arial, sans-serif;
+  }
+    
+    
+  /* body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Ocupa toda la altura de la ventana */
+    /* display: flex;
+    align-items: center;
+    justify-content: center;
+     */ 
+
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .dashboard {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 40px 0;
+    }
+
+    .card {
+      padding: 20px 30px;
+      background-color: white;
+      border: 2px solid #007BFF;
+      border-radius: 10px;
+      min-width: 250px;
+      text-align: center;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #333;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .card span {
+      display: block;
+      margin-top: 10px;
+      font-size: 1.5em;
+      color: #007BFF;
+    }
+  </style>
+</head>
+<header><center> <img src="logo.png" width="80" height="100px" alt="JHJ" class="d-block w-1"> </center></header>
+
+<body>
+
+  <h2>Dashboard de Gastos</h2>
+
+  <div class="dashboard">
+    <div class="card" id="gastoAlto">
+      Gasto mas alto
+      <span>$0.00</span>
+    </div>
+    <div class="card" id="gastoBajo">
+      Gasto mas bajo
+      <span>$0.00</span>
+    </div>
+    <div class="card" id="totalMes">
+      Total mes actual
+      <span>$0.00</span>
+    </div>
+  </div>
+  <center><a href="menu.html">Volver</a></center>
+
+  <script src="dashboard.js"></script>
+  
+  
+</body>
+</html>

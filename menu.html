@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <style>
+    body {      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 154px;
+      background: rgb(251,251,251);
+background: linear-gradient(180deg, rgba(251,251,251,0) 34%, rgba(50,200,253,1) 77%);   
+      /* background: linear-gradient(0deg, rgba(251,251,251,0) 34%, rgba(45,101,253,1) 77%); */
+    }
+    
+   
+    
+
+    h2 {
+      color: #333;
+    }
+
+
+
+    .acciones {
+      margin-top: 30px;
+    }
+
+    button, a {
+      padding: 10px 20px;
+      margin: 10px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      text-decoration: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    a:hover, button:hover {
+      background-color: #45a049;
+    }
+  </style> 
+</head>
+
+<header><center> <img src="logo.png" width="80" height="100px" alt="JHJ" class="d-block w-1"> </center></header>
+
+<body>
+  <h2>Bienvenido</h2>
+  <div class="info">
+     <p><strong>Nombre:</strong> <span id="nombreUsuario" ></span></p> 
+    
+    <p><strong>Correo:</strong> <span id="correoUsuario"></span></p>
+  </div>
+
+  <div class="acciones">
+    <a href="perfil.html">Editar Perfil</a>
+     <a href="gastosMes.html"><button>Gastos</button></a>
+     <a href="gastoGeneral.html"><button>Gastos General</button></a>
+     <a href="dashboard.html"><button>Dashboard</button></a>
+     
+     <button onclick="cerrarSesion()">Cerrar Sesion</button>
+   
+     
+  </div>
+
+<script src="dashboard.js"></script>
+
+
+
+
+  <script>
+     function cerrarSesion() {
+    localStorage.clear();
+    window.location.href = "iniciarSesion.html";
+   }   
+
+
+  //   function obtenerUsuario() {
+  //  const data = postman.getItem("usuario");
+  // return data ? JSON.parse(data) : null;
+// }
+function obtenerUsuario() {
+  const data = localStorage.getItem("usuario");
+  return data ? JSON.parse(data) : null;
+}
+
+   
+  const usuario = obtenerUsuario();
+  if (usuario) {
+   document.getElementById("nombreUsuario").textContent = usuario.nombre || usuario.name;
+   document.getElementById("correoUsuario").textContent = usuario.correo || usuario.email;
+
+  } else {
+    console.warn("No se encontro informacion del usuario.");
+  }
+
+
+  
+
+    
+  </script>
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+</head>
+<body>
+  <h2>Bienvenido, <span id="usuarioNombre"></span></h2>
+  <button onclick="cerrarSesion()">Cerrar Sesión</button>
+  <a href="perfil.html">Editar Perfil</a>
+
+  <script src="login.js"></script>
+  <script src="ruta.js"></script>
+  <script>
+    const usuario = obtenerUsuario();
+    document.getElementById("usuarioNombre").textContent = usuario?.nombre || "Usuario";
+  </script>
+</body>
+</html> -->
