@@ -48,7 +48,7 @@ try {
  const res = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses");
  if (!res.ok) throw new Error(`HTTP ${res.status}`);
  const datos = await res.json();
- console.log("API devuelve:", datos);
+
  gastos = datos.map(normalizarGasto);
 
  if (!gastos.length) {
@@ -103,9 +103,10 @@ agregarGasto.addEventListener("click", async function(e){
   const monto = parseFloat(document.getElementById("monto").value);
   const categoria = document.getElementById("categoria").value;
   const fecha = document.getElementById("fecha").value;
-  console.log(categoria)
-  if (!titulo || !monto || !fecha || !descripcion) {
+ 
+  if (!titulo || title, !monto || amount, !fecha || date, !descripcion || description) {
     return alert("Completa todos los campos");
+
   }
 
   const datos = {
@@ -126,6 +127,7 @@ agregarGasto.addEventListener("click", async function(e){
 
        
 // }
+
  
 try{
 const respuesta = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses",{
@@ -140,12 +142,15 @@ if(!respuesta.ok){
 }
 const data = await respuesta.json()
 alert("Enviado y Guardado Correctamente")
-console.log("Datos agregados", data)
+obtenerGastosDesdeAPI();
+
 
 // this.reset()
 }catch(error){
   console.error("Hubo problemas", error)
+alert("No se pudo agregar el gasto.");
 }
+
  })
 
 
@@ -190,7 +195,7 @@ console.log("Datos agregados", data)
 //     document.getElementById("fecha").value = "";
 //   } catch (error) {
 //     // console.error("Error al agregar gasto:", error);
-//     alert("No se pudo agregar el gasto.");
+//     
 //   }
 // }
 
@@ -207,7 +212,7 @@ function iniciarEdicion(id) {
       document.getElementById("descripcion").value = data.descripcion || data.description;
       document.getElementById("monto").value = data.monto || data.amount;
       document.getElementById("fecha").value = data.fecha || data.Date;
-
+      
       gastoEditandoId = id;
 
 
@@ -215,7 +220,7 @@ function iniciarEdicion(id) {
       document.getElementById("agregarGasto").style.display = "none";
       document.getElementById("btnGuardar").style.display = "inline-block";
       document.getElementById("btnCancelar").style.display = "inline-block";
-
+         
 
 
     })
@@ -233,6 +238,7 @@ function cancelarEdicion() {
   document.getElementById("btnAgregar").style.display = "inline-block";
   document.getElementById("btnGuardar").style.display = "none";
   document.getElementById("btnCancelar").style.display = "none";
+  document.getElementById("modalEditar").style.display="none";  
 
   // Resetear ID de edición
   gastoEditandoId = null;
@@ -405,7 +411,7 @@ function Tabla(lista) {
       document.getElementById("fecha").value = "";
 
       document.getElementById("btnGuardar").style.display = "none"
-      document.getElementById("btnAgregar").style.display = "inline-block"
+      // document.getElementById("btnAgregar").style.display = "inline-block"
 
       const mensajeError = document.getElementById("mensajeError");
       if (mensajeError) {
@@ -438,7 +444,7 @@ const openModalGastos = document.getElementById("btnOpenModalGastos")
 openModalGastos.addEventListener("click", () => {
  const  btnGuardar = document.querySelector("#btnGuardar")
  btnGuardar.style.diplay= "none"
- console.log(btnGuardar)
+
   modalGastos.style.display = "inline-block"
 
   document.getElementById("titulo").value = null;
