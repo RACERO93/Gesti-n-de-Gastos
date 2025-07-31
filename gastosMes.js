@@ -2,6 +2,9 @@ const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
   "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
 let gastos = [];
+
+
+
 let mesSeleccionado = new Date().getMonth();
 let idEditando = null;
 
@@ -87,19 +90,25 @@ function limpiarFiltros() {
 }
  
 
+// const btnGuardarGasto = document.querySelector("#btnGuardarGasto")
+const agregarGasto = document.querySelector("#agregarGasto")
+console.log(agregarGasto)
+agregarGasto.addEventListener("click", async function(e){
 
-async function agregarGasto() {
+ e.preventDefault()
+// obtener  datos del formulario
+// const formData = new FormData(this)
   const titulo = document.getElementById("titulo").value;
   const descripcion = document.getElementById("descripcion").value;
   const monto = parseFloat(document.getElementById("monto").value);
   const categoria = document.getElementById("categoria").value;
   const fecha = document.getElementById("fecha").value;
-
-  if (!titulo || !monto || !categoria || !fecha || !descripcion) {
+  console.log(categoria)
+  if (!titulo || !monto || !fecha || !descripcion) {
     return alert("Completa todos los campos");
   }
 
-  const gasto = {
+  const datos = {
     userId: 1,
     categoryId: categoria,
     title: titulo,
@@ -107,30 +116,83 @@ async function agregarGasto() {
     amount: monto,
     date: fecha
   };
+// const datos = {
+//   userId: 1,
+//     category:formData.get("categoria") ,
+//     title: formData.get("titulo"),
+//     description:formData.get("descripcion"),
+//     amount:formData.get("monto") ,
+//     date: formData.get("fecha")
 
-  try {
-    const res = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(gasto)
-    });
-
-    if (!res.ok) throw new Error("Error al agregar gasto");
-
-    alert("Enviado y Guardado correctamente");
-    // obtenerGastosDesdeAPI();
-
-    // Limpiar formulario
-    document.getElementById("titulo").value = "";
-    document.getElementById("descripcion").value = "";
-    document.getElementById("monto").value = "";
-    document.getElementById("categoria").value = "";
-    document.getElementById("fecha").value = "";
-  } catch (error) {
-    console.error("Error al agregar gasto:", error);
-    alert("No se pudo agregar el gasto.");
-  }
+       
+// }
+ 
+try{
+const respuesta = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses",{
+  method:"POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body:JSON.stringify(datos)
+})
+if(!respuesta.ok){
+  throw new Error("Error al enviar los datos");
 }
+const data = await respuesta.json()
+alert("Enviado y Guardado Correctamente")
+console.log("Datos agregados", data)
+
+// this.reset()
+}catch(error){
+  console.error("Hubo problemas", error)
+}
+ })
+
+
+// async function agregarGasto() {
+//   const titulo = document.getElementById("titulo").value;
+//   const descripcion = document.getElementById("descripcion").value;
+//   const monto = parseFloat(document.getElementById("monto").value);
+//   const categoria = document.getElementById("categoria").value;
+//   const fecha = document.getElementById("fecha").value;
+//   console.log(categoria)
+//   if (!titulo || !monto || !fecha || !descripcion) {
+//     return alert("Completa todos los campos");
+//   }
+
+//   const gasto = {
+//     userId: 1,
+//     categoryId: categoria,
+//     title: titulo,
+//     description: descripcion,
+//     amount: monto,
+//     date: fecha
+//   };
+//   console.log(gasto)
+
+//   try {
+//     const res = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses", {
+//       method: "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body: JSON.stringify(gasto)
+//     });
+//     console.log(res.ok)
+//     if (!res.ok) throw new Error("Error al agregar gasto");
+
+//     alert("Enviado y Guardado correctamente");
+//     obtenerGastosDesdeAPI();
+
+//     // Limpiar formulario
+//     document.getElementById("titulo").value = "";
+//     document.getElementById("descripcion").value = "";
+//     document.getElementById("monto").value = "";
+//     document.getElementById("categoria").value = "";
+//     document.getElementById("fecha").value = "";
+//   } catch (error) {
+//     // console.error("Error al agregar gasto:", error);
+//     alert("No se pudo agregar el gasto.");
+//   }
+// }
 
 let gastoEditandoId = null;
 
@@ -141,16 +203,16 @@ function iniciarEdicion(id) {
       // click para abrir modal al btn de abrir modal
       document.getElementById("btnOpenModalGastos").click()
 
-      document.getElementById("titulo").value = data.titulo;
-      document.getElementById("descripcion").value = data.descripcion;
-      document.getElementById("monto").value = data.monto;
-      document.getElementById("fecha").value = data.fecha;
+      document.getElementById("titulo").value = data.titulo || data.title;
+      document.getElementById("descripcion").value = data.descripcion || data.description;
+      document.getElementById("monto").value = data.monto || data.amount;
+      document.getElementById("fecha").value = data.fecha || data.Date;
 
       gastoEditandoId = id;
 
 
       document.getElementById("tituloModal").innerText = "Editar Gasto"
-      document.getElementById("btnAgregar").style.display = "none";
+      document.getElementById("agregarGasto").style.display = "none";
       document.getElementById("btnGuardar").style.display = "inline-block";
       document.getElementById("btnCancelar").style.display = "inline-block";
 
@@ -374,6 +436,9 @@ const btnOpenModal = document.getElementById("btnOpenModal")
 const modalGastos = document.querySelector(".modalGastos")
 const openModalGastos = document.getElementById("btnOpenModalGastos")
 openModalGastos.addEventListener("click", () => {
+ const  btnGuardar = document.querySelector("#btnGuardar")
+ btnGuardar.style.diplay= "none"
+ console.log(btnGuardar)
   modalGastos.style.display = "inline-block"
 
   document.getElementById("titulo").value = null;
@@ -382,7 +447,7 @@ openModalGastos.addEventListener("click", () => {
   document.getElementById("fecha").value = null;
 
 
-  document.getElementById("tituloModal").innerText = "Nuevo Gasto"
+  // document.getElementById("tituloModal").innerText = "Nuevo Gasto"
   document.getElementById("btnAgregar").style.display = "inline-block";
   document.getElementById("btnGuardar").style.display = "none";
 

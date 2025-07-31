@@ -203,6 +203,7 @@
 <body>
   <center><img src="logo.png" width="80" height="100px" alt="JHJ"></center>
   <h2>Gastos por Mes</h2>
+  
 
 
    
@@ -292,28 +293,29 @@
         <div class="content">
 
           <!-- Formulario de gastos-->
-           <form id="modalCategoria">
+          <form id="formularioAgregarGasto">
           <div class="formulario">
-            <h2 id="tituloModal">AGREGAR GASTOS</h2>
-            <input type="text" id="titulo" placeholder="Titulo">
-            <input type="text" id="descripcion" placeholder="Descripcion">
-            <input type="number" id="monto" placeholder="Monto">
-            <select id="categoria">
-
-             <p> <option disabled selected>Seleccionar una Categoria</option></p>
-             <button type="button" id="btnCategoria">Guardar</button>
+            <h2 id="tituloModal">Nuevo Gasto</h2>
+            <input type="text" name="titulo" id="titulo" placeholder="Titulo">
+            <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion">
+            <input type="number" name="monto"  id="monto" placeholder="Monto">
+            <input type="date" name="fecha" id="fecha">
+            <select name="categoria" id="categoria"> 
+                <option disabled selected>Seleccionar una Categoria</option>
+            </select>
+          
             </form>
+            <button id="agregarGasto" >Guardar Gasto</button>
+            <button id="btnGuardar" onclick="actualizarGasto()">Guardar cambios</button> -->
+
            
            
             
-   </select>
-            <input type="date" id="fecha">
-          
+
             <!-- Boton para agregar un gasto nuevo -->
           
-            <button id="btnAgregar" onclick="agregarGasto(event)">Enviar</button>
-            <button id="btnGuardar" onclick="actualizarGasto()" style="display: inline-block;">Guardar cambios</button>
-            <button class="btnModal">Cancelar</button>
+            <!-- <button id="btnAgregar" onclick="agregarGasto(event)">Enviar</button> -->
+            <!-- <button class="btnModal">Cancelar</button> -->
 
 
 
