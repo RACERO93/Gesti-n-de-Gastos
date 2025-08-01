@@ -109,18 +109,18 @@
       align-items: center;
     }
 
-    .modal .overlay .contentModal {
+      .modal .overlay .contentModal {
       width: 50%;
       height: 50%;
-      border: solid rgb(247, 97, 97);
-      background-color: hsla(240, 18%, 97%, 0.712);
+      border: solid red;
+      background-color: rgb(243, 240, 240);
     }
 
     .modalGastos .overlay .contentGasto {
       width: 400px;
       height: auto;
-      border: solid rgb(247, 97, 97);
-      background-color: hsla(240, 18%, 97%, 0.712);
+      border: solid red;
+      background-color: rgb(243, 240, 240);
       padding: 20px;
       border-radius: 10px;
     }
@@ -209,8 +209,8 @@
    
   <button id="btnOpenModal"style="display: none;" >Nueva Categoria</button>
   
-  <button id="btnOpenModalGastos"style="float: right;">Agregar Gasto</button><br><br>
-  <a href="categorias.html"><button style="float: right;" >Categorias</button></a>
+  <button id="btnOpenModalGastos">Agregar Gasto</button><br><br>
+  <a href="categorias.html"><button  >Categorias</button></a>
   <!-- Boton para guardar un gasto editar -->
   <!-- <button id="btnGuardar" style="display: none;" onclick="actualizarGasto()">Guardar cambios</button> -->
   <div id="mensajeError"
@@ -258,6 +258,30 @@
 
         <div class="content">
           <form>
+            <h3>Agregar nueva categoria</h3>
+            <input type="text" id="nuevaCategoria" placeholder="Nombre de la categoria" />
+            <button id="btnCategoria" onclick="agregarCategoria()">
+              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
+                fill="#1f1f1f">
+                <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" />
+              </svg>
+              <p>
+                Enviar
+              </p>
+            </button>
+            <p id="mensajeCategoria" style="color: green;"></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal">
+
+    <div class="overlay">
+      <div class="contentModal"><button class="btnModal" id="closeModal">x</button>
+
+        <div class="content">
+          <form>
              <center><img src="logo.png" width="80" height="100px" alt="JHJ"></center>
             <h3> <strong><em>Nueva Categoria</em></strong></h3>
             <input type="text" id="nuevaCategoria" placeholder="Nombre de la categoria" />
@@ -280,35 +304,38 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
 
 
 
   <!-- Modal Gastos  -->
 
-  <div class="modalGastos">
+   <div class="modalGastos">
     <div class="overlay">
       <div class="contentGasto"><button class="btnModal" id="closeModalGastos">x</button>
         <div class="content">
 
           <!-- Formulario de gastos-->
-          <form id="formularioAgregarGasto">
+          <!-- <form id="formularioAgregarGasto"> -->
           <div class="formulario">
             <h2 id="tituloModal">Nuevo Gasto</h2>
-            <input type="text" name="titulo" id="titulo" placeholder="Titulo">
-            <input type="text" name="descripcion" id="descripcion" placeholder="Descripcion">
-            <input type="number" name="monto"  id="monto" placeholder="Monto">
-            <input type="date" name="fecha" id="fecha">
-            <select name="categoria" id="categoria"> 
+            <input type="text" id="titulo" placeholder="Titulo">
+            <input type="text" id="descripcion" placeholder="Descripcion">
+            <input type="number" id="monto" placeholder="Monto">
+            
+            <select id="categoria"> 
                 <option disabled selected>Seleccionar una Categoria</option>
                 
             
             </select>
           
-            </form>
-            <button id="agregarGasto" onclick="btnAgregar()".style.display ="inline-block" >Guardar Gasto</button>
-            <button id="btnGuardar" onclick="actualizarGasto()".style.display ="none" >Guardar cambios</button> 
+           
+            <input type="date" id="fecha">
+            <!-- Boton para agregar un gasto nuevo -->
+            <button id="btnAgregar" style="display: none;" onclick="agregarGasto(event)">Guardar Gastos</button>
+            <button id="btnGuardar" style="display: none;" onclick="actualizarGasto()">Guardar cambios</button>
+            <button class="btnModal">Cancelar</button>
 
            
            

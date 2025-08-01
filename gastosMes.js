@@ -32,7 +32,7 @@ function normalizarGasto(gasto) {
   return {
     id: gasto.id || null,
     userId: gasto.userId,
-    categoria: gasto.categoria || gasto.categoryId || gasto.category,
+    categoria: gasto.categoria || gasto.categoryId || gasto.categoryId,
     titulo: gasto.titulo || gasto.title,
     descripcion: gasto.descripcion || gasto.description,
     monto: isNaN(Number(gasto.monto || gasto.amount)) ? 0 : Number(gasto.monto || gasto.amount),
@@ -45,17 +45,18 @@ function normalizarGasto(gasto) {
 async function obtenerGastosDesdeAPI() {
  mensajeError.style.display = "none";
 try {
- const res = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses");
- if (!res.ok) throw new Error(`HTTP ${res.status}`);
- const datos = await res.json();
+    const res = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses");
+    if (!res.ok) throw new Error("Error al obtener gastos");
+    const datos = await res.json();
 
- gastos = datos.map(normalizarGasto);
+    gastos = datos.map(normalizarGasto);
 
- if (!gastos.length) {
- mensajeError.textContent = "No hay gastos disponibles";
- mensajeError.style.display = "block";
- return;
- }
+
+//  if (!gastos.length) {
+//  mensajeError.textContent = "No hay gastos disponibles";
+//  mensajeError.style.display = "block";
+//  return;
+//  }
 
  filtrarGastos();
 } catch (err) {
@@ -91,81 +92,25 @@ function limpiarFiltros() {
  
 
 // const btnGuardarGasto = document.querySelector("#btnGuardarGasto")
-const agregarGasto = document.querySelector("#agregarGasto")
-console.log(agregarGasto)
-agregarGasto.addEventListener("click", async function(e){
+// const agregarGasto = document.querySelector("#agregarGasto")
+// console.log(agregarGasto)
+// agregarGasto.addEventListener("click", async function(e){
 
- e.preventDefault()
-// obtener  datos del formulario
-// const formData = new FormData(this)
-  const titulo = document.getElementById("titulo").value;
-  const descripcion = document.getElementById("descripcion").value;
-  const monto = parseFloat(document.getElementById("monto").value);
-  const categoria = document.getElementById("categoria").value;
-  const fecha = document.getElementById("fecha").value;
- 
-  if (!titulo || title, !monto || amount, !fecha || date, !descripcion || description) {
-    return alert("Completa todos los campos");
-
-  }
-
-  const datos = {
-    userId: 1,
-    categoryId: categoria,
-    title: titulo,
-    description: descripcion,
-    amount: monto,
-    date: fecha
-  };
-// const datos = {
-//   userId: 1,
-//     category:formData.get("categoria") ,
-//     title: formData.get("titulo"),
-//     description:formData.get("descripcion"),
-//     amount:formData.get("monto") ,
-//     date: formData.get("fecha")
-
-       
-// }
-
- 
-try{
-const respuesta = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses",{
-  method:"POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body:JSON.stringify(datos)
-})
-if(!respuesta.ok){
-  throw new Error("Error al enviar los datos");
-}
-const data = await respuesta.json()
-alert("Enviado y Guardado Correctamente")
-obtenerGastosDesdeAPI();
-
-
-// this.reset()
-}catch(error){
-  console.error("Hubo problemas", error)
-alert("No se pudo agregar el gasto.");
-}
-
- })
-
-
-// async function agregarGasto() {
+//  e.preventDefault()
+// // obtener  datos del formulario
+// // const formData = new FormData(this)
 //   const titulo = document.getElementById("titulo").value;
 //   const descripcion = document.getElementById("descripcion").value;
 //   const monto = parseFloat(document.getElementById("monto").value);
 //   const categoria = document.getElementById("categoria").value;
 //   const fecha = document.getElementById("fecha").value;
-//   console.log(categoria)
-//   if (!titulo || !monto || !fecha || !descripcion) {
+ 
+//   if (!titulo || title, !monto || amount, !fecha || date, !descripcion || description) {
 //     return alert("Completa todos los campos");
+
 //   }
 
-//   const gasto = {
+//   const datos = {
 //     userId: 1,
 //     categoryId: categoria,
 //     title: titulo,
@@ -173,31 +118,93 @@ alert("No se pudo agregar el gasto.");
 //     amount: monto,
 //     date: fecha
 //   };
-//   console.log(gasto)
+// // const datos = {
+// //   userId: 1,
+// //     category:formData.get("categoria") ,
+// //     title: formData.get("titulo"),
+// //     description:formData.get("descripcion"),
+// //     amount:formData.get("monto") ,
+// //     date: formData.get("fecha")
 
-//   try {
-//     const res = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify(gasto)
-//     });
-//     console.log(res.ok)
-//     if (!res.ok) throw new Error("Error al agregar gasto");
+       
+// // }
 
-//     alert("Enviado y Guardado correctamente");
-//     obtenerGastosDesdeAPI();
-
-//     // Limpiar formulario
-//     document.getElementById("titulo").value = "";
-//     document.getElementById("descripcion").value = "";
-//     document.getElementById("monto").value = "";
-//     document.getElementById("categoria").value = "";
-//     document.getElementById("fecha").value = "";
-//   } catch (error) {
-//     // console.error("Error al agregar gasto:", error);
-//     
-//   }
+ 
+// try{
+// const respuesta = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses",{
+//   method:"POST",
+//   headers: {
+//     "Content-Type": "application/json"
+//   },
+//   body:JSON.stringify(datos)
+// })
+// if(!respuesta.ok){
+//   throw new Error("Error al enviar los datos");
 // }
+// const data = await respuesta.json()
+// alert("Enviado y Guardado Correctamente")
+// obtenerGastosDesdeAPI();
+
+
+// // this.reset()
+// }catch(error){
+//   console.error("Hubo problemas", error)
+// alert("No se pudo agregar el gasto.");
+// }
+
+//  })
+
+
+async function agregarGasto() {
+  const titulo = document.getElementById("titulo").value;
+  const descripcion = document.getElementById("descripcion").value;
+  const monto = parseFloat(document.getElementById("monto").value);
+  const categoria = document.getElementById("categoria").value;
+  const fecha = document.getElementById("fecha").value;
+
+  if (!titulo || !monto || !categoria || !fecha || !descripcion) {
+    return alert("Completa todos los campos");
+  }
+
+  const gasto = {
+    userId: 1,
+    categoryId: categoria,
+    title: titulo,
+    description: descripcion,
+    amount: monto,
+    date: fecha
+  };
+
+  try {
+    const res = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(gasto)
+    });
+
+    if (!res.ok) throw new Error("Error al agregar gasto");
+
+    alert("Enviado y Guardado correctamente");
+    obtenerGastosDesdeAPI();
+   
+    const modal = document.querySelector(".modalGastos")
+    modal.style.display= "none"
+
+    // Limpiar formulario
+    document.getElementById("titulo").value = "";
+    document.getElementById("descripcion").value = "";
+    document.getElementById("monto").value = "";
+    document.getElementById("categoria").value = "";
+    document.getElementById("fecha").value = "";
+  } catch (error) {
+    console.error("Error al agregar gasto:", error);
+    alert("No se pudo agregar el gasto.");
+  }
+  
+
+  
+
+}
 
 let gastoEditandoId = null;
 
@@ -206,7 +213,8 @@ function iniciarEdicion(id) {
     .then(res => res.json())
     .then(data => {
       // click para abrir modal al btn de abrir modal
-      document.getElementById("btnOpenModalGastos").click()
+        document.getElementById("btnOpenModalGastos").click()
+      // document.getElementById("btnOpenModalGastos").click()
 
       document.getElementById("titulo").value = data.titulo || data.title;
       document.getElementById("descripcion").value = data.descripcion || data.description;
@@ -217,15 +225,20 @@ function iniciarEdicion(id) {
 
 
       document.getElementById("tituloModal").innerText = "Editar Gasto"
-      document.getElementById("agregarGasto").style.display = "none";
+       document.getElementById("btnAgregar").style.display = "none";
       document.getElementById("btnGuardar").style.display = "inline-block";
-      document.getElementById("btnCancelar").style.display = "inline-block";
+      // document.getElementById("btnCancelar").style.display = "inline-block";
+
+      const modal = document.querySelector(".modalGastos")
+    modal.style.display= "none"
          
 
 
     })
-    .catch(err => console.error("Error al cargar gasto:", err));
+    .catch(error => console.error("Error al cargar gasto:", error));
 }
+
+
 function cancelarEdicion() {
   // Limpiar campos del formulario
   document.getElementById("titulo").value = "";
@@ -238,7 +251,7 @@ function cancelarEdicion() {
   document.getElementById("btnAgregar").style.display = "inline-block";
   document.getElementById("btnGuardar").style.display = "none";
   document.getElementById("btnCancelar").style.display = "none";
-  document.getElementById("modalEditar").style.display="none";  
+  // document.getElementById("modalEditar").style.display="none";  
 
   // Resetear ID de edición
   gastoEditandoId = null;
@@ -308,17 +321,17 @@ async function agregarCategoria() {
     const res = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/categories", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name})
+      body: JSON.stringify({name})
     });
 
     if (!res.ok) throw new Error("No se pudo crear la categoria");
 
     const nuevaOpcion = document.createElement("option");
-    nuevaOpcion.value = nombre;
-    nuevaOpcion.textContent = nombre;
+    nuevaOpcion.value = name;
+    nuevaOpcion.textContent = name;
     select.appendChild(nuevaOpcion);
 
-    select.value = nombre;
+    select.value = name;
 
     mensaje.textContent = " Categoria agregada";
     mensaje.style.color = "green";
@@ -411,7 +424,7 @@ function Tabla(lista) {
       document.getElementById("fecha").value = "";
 
       document.getElementById("btnGuardar").style.display = "none"
-      // document.getElementById("btnAgregar").style.display = "inline-block"
+      document.getElementById("btnAgregar").style.display = "inline-block"
 
       const mensajeError = document.getElementById("mensajeError");
       if (mensajeError) {
@@ -428,8 +441,7 @@ function Tabla(lista) {
 obtenerGastosDesdeAPI();
 
 //close Modal categoria
-const btnCloseModal = document.getElementById("closeModal")
-
+const btnCloseModal = document.getElementById("closeModal") 
 btnCloseModal.addEventListener('click', () => {
   document.querySelector(".modal").style.display = "none"
 
@@ -437,14 +449,16 @@ btnCloseModal.addEventListener('click', () => {
 // Open modal de categoria 
 const btnOpenModal = document.getElementById("btnOpenModal")
 
+btnOpenModal.addEventListener('click', () => {
+  document.querySelector(".modal").style.display = "inline-block"
+
+})
 //modal gastos
 // abrir modal de agregar nun gasto
+
 const modalGastos = document.querySelector(".modalGastos")
 const openModalGastos = document.getElementById("btnOpenModalGastos")
 openModalGastos.addEventListener("click", () => {
- const  btnGuardar = document.querySelector("#btnGuardar")
- btnGuardar.style.diplay= "none"
-
   modalGastos.style.display = "inline-block"
 
   document.getElementById("titulo").value = null;
@@ -453,17 +467,21 @@ openModalGastos.addEventListener("click", () => {
   document.getElementById("fecha").value = null;
 
 
-  // document.getElementById("tituloModal").innerText = "Nuevo Gasto"
+  document.getElementById("tituloModal").innerText = "Nuevo Gasto"
   document.getElementById("btnAgregar").style.display = "inline-block";
   document.getElementById("btnGuardar").style.display = "none";
 
+  // document.getElementById("btnCancelar").style.display = "inline-block";
+
 })
+
+// cerra modal gastos 
+
 document.querySelectorAll(".btnModal").forEach((btn) => {
   btn.addEventListener("click", () => {
     document.querySelector(".modalGastos").style.display = "none";
   });
 });
-
 
 //obtener  categoria
 const url = "https://.booksandbooksdigital.com.co/practicante/backend/categories";
