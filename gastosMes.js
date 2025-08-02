@@ -227,7 +227,7 @@ function iniciarEdicion(id) {
       document.getElementById("tituloModal").innerText = "Editar Gasto"
        document.getElementById("btnAgregar").style.display = "none";
       document.getElementById("btnGuardar").style.display = "inline-block";
-      // document.getElementById("btnCancelar").style.display = "inline-block";
+      document.getElementById("btnCancelar").style.display = "inline-block";
 
       const modal = document.querySelector(".modalGastos")
     modal.style.display= "none"
@@ -251,7 +251,7 @@ function cancelarEdicion() {
   document.getElementById("btnAgregar").style.display = "inline-block";
   document.getElementById("btnGuardar").style.display = "none";
   document.getElementById("btnCancelar").style.display = "none";
-  // document.getElementById("modalEditar").style.display="none";  
+ document.getElementById("modalEditar").style.display="inlne-block";  
 
   // Resetear ID de edición
   gastoEditandoId = null;
