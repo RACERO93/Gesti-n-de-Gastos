@@ -64,7 +64,8 @@ function renderizarTabla(lista) {
       <td>$${g.monto.toFixed(2)}</td>
       <td>${new Date(g.fecha).toLocaleDateString()}</td>
       <td>
-g.id})">Eliminar</button>
+     <button onclick="editarGasto(${g.id})">Editar</button>
+        <button onclick="eliminarGasto(${g.id})">Eliminar</button>
       </td>
     `;
     tbody.appendChild(fila);
