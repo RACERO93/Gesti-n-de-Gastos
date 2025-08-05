@@ -249,7 +249,7 @@ function cancelarEdicion() {
 
   // Restaurar botones
   document.getElementById("btnAgregar").style.display = "inline-block";
-  document.getElementById("btnGuardar").style.display = "none";
+  document.getElementById("btnGuardar").style.display = "inlene-block";
   document.getElementById("btnCancelar").style.display = "none";
  document.getElementById("modalEditar").style.display="inlne-block";  
 
@@ -446,7 +446,7 @@ btnCloseModal.addEventListener('click', () => {
   document.querySelector(".modal").style.display = "none"
 
 })
-// Open modal de categoria 
+// Open modal de categoria  
 const btnOpenModal = document.getElementById("btnOpenModal")
 
 btnOpenModal.addEventListener('click', () => {
@@ -483,6 +483,12 @@ document.querySelectorAll(".btnModal").forEach((btn) => {
   });
 });
 
+function cerrarModalEditar(){
+
+const modal = document.getElementById("modalGasto")
+modal.style = "none";
+
+}
 //obtener  categoria
 const url = "https://.booksandbooksdigital.com.co/practicante/backend/categories";
  

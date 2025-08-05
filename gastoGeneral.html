@@ -59,9 +59,56 @@
       padding: 5px 10px;
       margin: 2px;
     }
+
+    .modal {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  border-radius: 8px;
+}
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
+.modal {
+  position: fixed;
+  z-index: 30;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(134, 132, 245, 0.322);
+}
+.modal-content {
+  background-color: rgb(226, 52, 52);
+  margin: 10% auto;
+  padding: 30px;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 15px;
+}
+.close {
+  float: right;
+  font-size: 24px;
+  cursor: pointer;
+}
   </style>
 </head>
-<body>
+<body> 
 
 <h2>Gasto General</h2>
 
@@ -121,9 +168,36 @@
   <tbody id="tablaGastos"></tbody>
 </table>
 
+<div id="modalEditar" class="modal" style="display:none;">
 
+  <div class="modal-content">
+     <div class="contentModal"><button class="btnModal" id="closeModal">x</button>
+    <span class="close" onclick="cerrarModalEditar()">&times;</span>
+    <h2>Editar Gasto</h2>
+    <form id="loginForm">
+    <form id="formEditarGasto">
 
+      <!-- el modal de editar  -->
+      <input type="hidden" id="idEditar">
 
+      <label for="tituloEditar">Título:</label>
+      <input type="text" id="tituloEditar" required>
+       <select id="categoriaEditar"> 
+               <option disabled selected>Seleccionar una Categoria</option> 
+            </select>
+        
+      <label for="montoEditar">Monto:</label>
+      <input type="number" id="montoEditar" required>
+
+      <label for="fechaEditar">Fecha:</label>
+      <input type="date" id="fechaEditar" required>
+
+      <button type="submit">Guardar Cambios</button>
+      </form>
+    </form>
+  </div>
+</div>
+</div>
 
 <script src="gastoGeneral.js"></script>
 
