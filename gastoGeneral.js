@@ -6,8 +6,8 @@ fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses")
     .then(data => {
 gastos = data.map(g => ({
 id: g.id,
-        titulo: g.titulo || g.title || "Sin título",
-        categoria: g.categoria || g.category || g.categoryId || "Sin categoría",
+        titulo: g.titulo || g.title || "Sin titulo",
+        categoria: g.categoria || g.category || g.categoryId || "Sin categoria",
         monto: Number(g.monto || g.amount || 0),
 fecha: g.fecha || g.date || ""
       }));

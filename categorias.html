@@ -174,6 +174,56 @@
   border-radius: 10px;
   width: 300px;
 }
+.modals{
+      position:fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgb(0,0,0,);  
+    }
+
+    /* modal de edtitar categorias */
+  /* Fondo oscuro detrás del modal */
+  .modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+ 
+  /* Contenido del modal */
+  .modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+ 
+  /* Botón cerrar (X) */
+  .close {
+    color: #aaa;
+    font-size: 24px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    cursor: pointer;
+  }
+ 
+  .close:hover {
+    color: red;
+  }
 
   </style>
 </head>
@@ -184,6 +234,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>Categorias</title>
+  
   
     
   
@@ -284,28 +335,40 @@
     </tbody>
   </table>
 
-  <div id="ediarCategoria"class="modal" style="display: none;">
-  <div id="modal-container">
-    <span id="cerrarModalEditar" class="cerrar">&times;</span>
-    <h2>Editar Categoria</h2>
-    <label for="editarNombreCategoria">Nuevo Nombre</label>
-    <input type="text" id="editarNombreCategoria" placeholder="Nombre de Categoria"/>
-    <input type="hidden" id="editarCategoriaId"/>
-    <button id="guardarCambioCategoria">Guardar Cambios</button>
-  </div>
-  </div>
+  <!-- Botón para abrir el modal -->
+<button id  =""><H1>AGREGAR CATEGORIA</H1></button>
+ <button id=""style="display: none;" >Nueva Categoria</button>
+<!-- Modal -->
+<div id="myModal" class="modal">
+<div class="modal-content">
+<button id="closeModalBtn" class="close">&times;</button>
+<h2>Editar Categoria</h2>
+<label for="categoria">Categoria</label>
+ <input type="text" id="categoria" placeholder="categoria">
+ <button onclick="actualizarCategoria()">Enviar</button>
+
+</div>
+</div>
 
 
 
 
- <div class="modal">
+
+
+
+
+
+
+
+ <!-- <div class="modals">
 
     <div class="overlay">
-      <div class="contentModal"><button class="btnModal" id="closeModal">x</button>
-
+      <div class="contentModal"><button class="btnModals" id="closeModal">x</button>
+        <span class="cerrarr" id="cerrarModalEditar">&times;</span>
         <div class="content">
           <form>
             <h3>Editar Categoria</h3>
+            <input type="hidden" id="editarCategoriaId">
             <input type="text" id="editarCategoriaId" placeholder="Nombre de la categoria" />
             <button id="btnCategoria" onclick="agregarCategoria()">
               <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
@@ -321,49 +384,23 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
-
-  
-  <!-- MODAL EDITAR CATEGORÍA
-<div class="modalEditarCategoria" style="display:none; position:fixed; top:20%; left:50%; transform:translateX(-50%); background:white; border:1px solid #ccc; padding:20px; z-index:1000;">
-  <h3>Editar Categorias</h3>
-  <input type="text" id="inputEditarCategoria" />
-  <br><br>
-  <button id="btnGuardarEdicion">Guardar</button>
-  <button id="btnCancelarEdicion">Cancelar</button>
-  <p id="mensajeEditarCategoria" style="color:red;"></p>
-</div>
-
---------- Modal Agregar Categoría -->
-<!-- <div class="modal" id="modalAgregarCategoria">
-  <input id="nuevaCategoria" type="text" placeholder="Nombre de categoría" />
-  <button id="btnAgregarCategoria">Agregar</button>
-  <p id="mensajeCategoria"></p>
-</div> -->
-
-<!-- Modal Editar Categoría -->
-<!-- <div class="modalEditarCategoria" style="display:none;">
-  <input id="inputEditarCategoria" type="text" placeholder="Nuevo nombre" />
-  <button id="btnGuardarEdicion">Guardar</button>
-  <button id="btnCancelarEdicion">Cancelar</button>
-  <p id="mensajeEditarCategoria"></p>
-</div> -->
-
-<!-- Tabla -->
-<!-- <table>
-  <thead>
-    <tr><th>ID</th><th>Nombre</th><th>Acciones</th></tr>
-  </thead>
-  <tbody id="tablaCategoria"></tbody>
-</table> -->
-
-<!-- Selector (para usar las categorías) -->
-<!-- <select id="categoria"></select> --> 
-
-
-
-
+   <!-- <button id="btnAbrirModalEditar">x</button>
+  <div id="editarModalCategoria" class="modal">
+       <div class="overlay"> 
+    <div id="modal-contenido">
+      <span class="cerrarr" id="cerrarModalEditar">&times;</span>
+      <h3>Editar Categoria</h3>
+      <form id="formEditarCategoria">
+        <label for="inputCategoria">Nombre de la Categoria</label>
+        <input type="text" id="inputCategoria" name="categoria"required>
+        <br><br>
+        <button type="submit">Guardar Cambios</button>
+      </form>
+     </div>
+    </div>
+    </div> -->
  
   <script src="categorias.js"></script>
   

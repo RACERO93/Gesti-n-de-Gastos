@@ -1,4 +1,4 @@
-const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+ const meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
   "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
 
 let gastos = [];
@@ -209,6 +209,7 @@ async function agregarGasto() {
 let gastoEditandoId = null;
 
 function iniciarEdicion(id) {
+  try {
   fetch(`https://demos.booksandbooksdigital.com.co/practicante/backend/expenses/${id}`)
     .then(res => res.json())
     .then(data => {
@@ -228,14 +229,17 @@ function iniciarEdicion(id) {
        document.getElementById("btnAgregar").style.display = "none";
       document.getElementById("btnGuardar").style.display = "inline-block";
       document.getElementById("btnCancelar").style.display = "inline-block";
-
-      const modal = document.querySelector(".modalGastos")
-    modal.style.display= "none"
          
-
+     
 
     })
-    .catch(error => console.error("Error al cargar gasto:", error));
+    
+      
+      
+    } catch (error) {
+      console.error("Error al cargar gasto:", error)
+    }
+    
 }
 
 
@@ -299,6 +303,9 @@ function actualizarGasto() {
 
       gastoEditandoId = null;
       obtenerGastosDesdeAPI();
+       const modal = document.querySelector(".modalGastos")
+     
+       modal.style.display= "none"
     })
     .catch(err => {
       console.error("Error:", err);
@@ -485,8 +492,9 @@ document.querySelectorAll(".btnModal").forEach((btn) => {
 
 function cerrarModalEditar(){
 
-const modal = document.getElementById("modalGasto")
-modal.style = "none";
+const modal = document.getElementById(".modalGasto")
+
+modal.style.display = "none";
 
 }
 //obtener  categoria

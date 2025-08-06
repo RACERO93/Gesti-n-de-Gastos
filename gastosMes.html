@@ -195,8 +195,7 @@
       gap: 0.5rem;
       padding: 0.5rem;
     }
-
-
+    
   </style>
 </head>
 
@@ -204,7 +203,7 @@
   <center><img src="logo.png" width="80" height="100px" alt="JHJ"></center>
   <h2>Gastos por Mes</h2>
   
-
+  
 
    
   <button id="btnOpenModal"style="display: none;" >Nueva Categoria</button>
@@ -275,43 +274,14 @@
       </div>
     </div>
   </div>
-  <!-- <div class="modal">
-
-    <div class="overlay">
-      <div class="contentModal"><button class="btnModal" id="closeModal">x</button>
-
-        <div class="content">
-          <form>
-             <center><img src="logo.png" width="80" height="100px" alt="JHJ"></center>
-            <h3> <strong><em>Nueva Categoria</em></strong></h3>
-            <input type="text" id="nuevaCategoria" placeholder="Nombre de la categoria" />
-            <button id="btnCategoria" onclick="agregarCategoria()">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                fill="#1f1f1f">
-                <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" />
-              </svg>
-              <p>
-                Enviar
-              </p>
-            </button>
-             <input type="text" id="nuevaCategoria" placeholder="Nombre de la Categoria " style="display: none;">  
-            <button type="button" id="btnAgregarCategoria" onclick="agregarCategoria()" style="display: none;">Agregar</button>
-            <button type="button" id="btnGuardarCategoria" onclick="actualizarCategoria()" style="display: none">Guardar</button>
-            <p id="mensajeCategoria" style="color: #4CAF50;"></p>
-            <div id="mlistaCategoria" style="margin-top: 20px;"></div> 
-             
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> -->
+  
 
 
 
 
   <!-- Modal Gastos  -->
 
-   <div class="modalGastos"  class="modal">
+   <div class="modalGastos" style="display: none;" class="modals">
     <div class="overlay">
       <div class="contentGasto"><button class="btnModal" id="closeModalGastos">x</button>
         <div class="content">
@@ -334,7 +304,7 @@
             <input type="date" id="fecha">
             <!-- Boton para agregar un gasto nuevo -->
             <button id="btnAgregar" style="display: none;" onclick="agregarGasto(event)">Guardar Gastos</button>
-            <button id="btnGuardar" style="display: none;" onclick="actualizarGasto(event)">Guardar cambios</button>
+            <button id="btnGuardar" style="display: none;" onclick="actualizarGasto()">Guardar cambios</button>
             <button class="btnModal">Cancelar</button>
 
            
@@ -361,6 +331,8 @@
 
 
 
+
+ 
   <script src="gastosMes.js"></script>
 
 

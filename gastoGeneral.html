@@ -68,10 +68,10 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(15, 15, 15, 0.281);
 }
 .modal-content {
-  background-color: #fff;
+  background-color: #1111116e;
   margin: 10% auto;
   padding: 20px;
   width: 90%;
@@ -94,7 +94,7 @@
   background-color: rgba(134, 132, 245, 0.322);
 }
 .modal-content {
-  background-color: rgb(226, 52, 52);
+  background-color: rgba(253, 252, 252, 0.979);
   margin: 10% auto;
   padding: 30px;
   width: 100%;
@@ -171,8 +171,8 @@
 <div id="modalEditar" class="modal" style="display:none;">
 
   <div class="modal-content">
-     <div class="contentModal"><button class="btnModal" id="closeModal">x</button>
-    <span class="close" onclick="cerrarModalEditar()">&times;</span>
+     <!-- <div class="contentModal"><button class="btnModal" id="closeModal">x</button> -->
+    <button class="close" onclick="cerrarModalEditar()">&times;</button>
     <h2>Editar Gasto</h2>
     <form id="loginForm">
     <form id="formEditarGasto">
@@ -181,18 +181,20 @@
       <input type="hidden" id="idEditar">
 
       <label for="tituloEditar">Título:</label>
-      <input type="text" id="tituloEditar" required>
+      <input type="text" id="tituloEditar" required><br><br>
+      <label for="categoriaEditar">Categorias:</label>
        <select id="categoriaEditar"> 
+
                <option disabled selected>Seleccionar una Categoria</option> 
-            </select>
+            </select><br><br>
         
       <label for="montoEditar">Monto:</label>
-      <input type="number" id="montoEditar" required>
+      <input type="number" id="montoEditar" required><br><br>
 
       <label for="fechaEditar">Fecha:</label>
-      <input type="date" id="fechaEditar" required>
+      <input type="date" id="fechaEditar" required><br><br>
 
-      <button type="submit">Guardar Cambios</button>
+      <center><button type="submit".style="display: none;">Guardar Cambios</button></center>
       </form>
     </form>
   </div>

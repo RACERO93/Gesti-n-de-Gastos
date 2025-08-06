@@ -134,6 +134,10 @@ async function cargarCategorias() {
 }
 
 obtenerGastosDesdeAPI();
+
+ let categoriaEditandoId = null
+
+
  function actualizarCategoria() {
    const nombre = document.getElementById("nuevaCategoria").value.trim();
    const mensaje = document.getElementById("mensajeCategoria");
@@ -154,7 +158,7 @@ obtenerGastosDesdeAPI();
        return res.json();
      })
      .then(() => {
-       mensaje.textContent = "Categoría actualizada correctamente";
+       mensaje.textContent = "Categoria actualizada correctamente";
        mensaje.style.color = "green";
        document.getElementById("nuevaCategoria").value = "";
        categoriaEditandoId = null;
@@ -187,7 +191,7 @@ obtenerGastosDesdeAPI();
     
      tr.innerHTML = `
   
-         <button onclick="editarCategoria(${categoria.id})" class="guardarCambioCategoria ">Editar</button>
+         <button onclick="openModalBtn(${categoria.id})" class="guardarCambioCategoria ">Editar</button>
          <button onclick="eliminarGasto(${categoria.id})">Eliminar</button>
        </td>
      `;
@@ -246,7 +250,7 @@ async function mostrarCategoriasEnTabla() {
       <td>${cat.id}</td>
       <td>${cat.name}</td>
       <td> 
-      <button onclick="btnCategoria(${cat.id}, '${cat.name}')">Editar</button>
+      <button onclick="btnEditarCategoria(${cat.id}, '${cat.name}')">Editar</button>
       <button disabled>Eliminar</button 
       </td>
       `;
@@ -262,92 +266,73 @@ async function mostrarCategoriasEnTabla() {
 
  function editarCategoria(id,nombre) {
   alert(`Editar categoria ID ${id},con nombre ${nombre}`);
+
  }
+
+//////////////////////////////////////////////////
+
+
+
+
+
+
+
+// Actualizar por PUT
+function actualizarCategoria() {
+ const nuevoNombre = document.getElementById("categoria").value.trim();
+
+ if (!nuevoNombre) {
+ alert("Debes ingresar un nombre de categoria");
+
+ }
+
+ const categoriaActualizada = { name: nuevoNombre };
+
+ fetch(`https://demos.booksandbooksdigital.com.co/practicante/backend/categories/${categoriaEditandoId}`, {
+ method: "PUT",
+ headers: { "Content-Type": "application/json" },
+ body: JSON.stringify(categoriaActualizada)
+ })
+.then(res => {
+ if (!res.ok) throw new Error("Error al actualizar");
+ return res.json();
+ })
+ .then(() => {
+ alert("Categoria actualizada correctamente");
+ document.getElementById("myModal").style.display = "none";
+ document.getElementById("categoria").value = "";
+ categoriaEditandoId = null;
+ obtenerCategoriasDesdeAPI();
+ })
+ .catch(err => {
+ console.error("Error:", err);
+ alert("No se pudo actualizar la categoria.");
+ });
+}
+
+
+
 
 
  //////////////////////////////////////////////
  
-
+ const openModalBtn = document.getElementById("openModalBtn");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+  const modal = document.getElementById("myModal");
  
-let categoriaEditandoId = null;
-
-function editarCategoria(id, nombre) {
-  categoriaEditandoId = id;
-  document.getElementById("inputEditarCategoria").value = nombre;
-  document.querySelector(".modalEditarCategoria").style.display = "block";
-}
-
-// Guardar cambios desde el modal
-document.getElementById("btnCategoria").addEventListener("click", async () => {
-  const nuevoNombre = document.getElementById("inputEditarCategoria").value.trim();
-  editarCategoriaAPI(categoriaEditandoId, nuevoNombre);
-});
-
-
-
-async function editarCategoriaAPI(id, nuevoNombre) {
-  const mensaje = document.getElementById("mensajeEditarCategoria");
-
-  if (!id || !nuevoNombre) {
-    mensaje.textContent = "El nombre no puede estar vacío.";
-    mensaje.style.color = "red";
-    return;
-  }
-
-  try {
-    const res = await fetch(`https://demos.booksandbooksdigital.com.co/practicante/backend/categories/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: nuevoNombre })
-    });
-
-    if (!res.ok) throw new Error("No se pudo actualizar");
-
-    mensaje.textContent = "Categoría actualizada correctamente.";
-    mensaje.style.color = "green";
-
-    setTimeout(() => {
-      document.querySelector(".modalEditarCategoria").style.display = "none";
-      mensaje.textContent = "";
-      mostrarCategoriasEnTabla();
-      cargarCategorias(nuevoNombre);
-      filtrarCategorias(); // si hay texto en filtro
-    }, 1000);
-
-  } catch (error) {
-    console.error("Error al actualizar:", error);
-    mensaje.textContent = "Error al actualizar categoría.";
-    mensaje.style.color = "red";
-  }
-}
-
-async function mostrarCategoriasEnTabla() {
-  const tabla = document.getElementById("tablaCategoria");
-  tabla.innerHTML = "";
-
-  try {
-    const res = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/categories");
-    const categorias = await res.json();
-
-    categorias.forEach(cat => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${cat.id}</td>
-        <td>${cat.name}</td>
-        <td>
-          <button onclick="editarCategoria(${cat.id}, '${cat.name}')">Editar</button>
-          <button disabled>Eliminar</button>
-        </td>
-      `;
-      tabla.appendChild(tr);
-    });
-
-  } catch (error) {
-    console.error("Error al cargar categorías:", error);
-    tabla.innerHTML = `<tr><td colspan="3">Error al cargar la tabla</td></tr>`;
-  }
-}
-
-
-
+  openModalBtn.addEventListener("click", () => {
+    modal.style.display = "block";
+  });
+  
+//  Cerrar Modal
+  closeModalBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+ 
+  // // Cierra el modal si haces clic fuera del contenido
+  // window.addEventListener("click", (event) => {
+  //   if (event.target === modal) {
+  //     modal.style.display = "none";
+  //   }
+  // });
 
