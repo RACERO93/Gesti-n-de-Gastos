@@ -36,7 +36,7 @@ function normalizarGasto(gasto) {
     titulo: gasto.titulo || gasto.title,
     descripcion: gasto.descripcion || gasto.description,
     monto: isNaN(Number(gasto.monto || gasto.amount)) ? 0 : Number(gasto.monto || gasto.amount),
-    fecha: gasto.fecha || gasto.date || new Date().toISOString().split("T")[0]
+    fecha: gasto.fecha || gasto.date || new Date().toISOString().split()[0]
   };
 }
 
@@ -90,77 +90,17 @@ function limpiarFiltros() {
   filtrarGastos();
 }
  
-
-// const btnGuardarGasto = document.querySelector("#btnGuardarGasto")
-// const agregarGasto = document.querySelector("#agregarGasto")
-// console.log(agregarGasto)
-// agregarGasto.addEventListener("click", async function(e){
-
-//  e.preventDefault()
-// // obtener  datos del formulario
-// // const formData = new FormData(this)
-//   const titulo = document.getElementById("titulo").value;
-//   const descripcion = document.getElementById("descripcion").value;
-//   const monto = parseFloat(document.getElementById("monto").value);
-//   const categoria = document.getElementById("categoria").value;
-//   const fecha = document.getElementById("fecha").value;
- 
-//   if (!titulo || title, !monto || amount, !fecha || date, !descripcion || description) {
-//     return alert("Completa todos los campos");
-
-//   }
-
-//   const datos = {
-//     userId: 1,
-//     categoryId: categoria,
-//     title: titulo,
-//     description: descripcion,
-//     amount: monto,
-//     date: fecha
-//   };
-// // const datos = {
-// //   userId: 1,
-// //     category:formData.get("categoria") ,
-// //     title: formData.get("titulo"),
-// //     description:formData.get("descripcion"),
-// //     amount:formData.get("monto") ,
-// //     date: formData.get("fecha")
-
-       
-// // }
-
- 
-// try{
-// const respuesta = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses",{
-//   method:"POST",
-//   headers: {
-//     "Content-Type": "application/json"
-//   },
-//   body:JSON.stringify(datos)
-// })
-// if(!respuesta.ok){
-//   throw new Error("Error al enviar los datos");
-// }
-// const data = await respuesta.json()
-// alert("Enviado y Guardado Correctamente")
-// obtenerGastosDesdeAPI();
-
-
-// // this.reset()
-// }catch(error){
-//   console.error("Hubo problemas", error)
-// alert("No se pudo agregar el gasto.");
-// }
-
-//  })
-
-
 async function agregarGasto() {
+  const usuario= JSON.parse(localStorage.getItem("usuario"));
+  if (!usuario)return alert("no hay sesion iniciada");
+
+
   const titulo = document.getElementById("titulo").value;
   const descripcion = document.getElementById("descripcion").value;
   const monto = parseFloat(document.getElementById("monto").value);
   const categoria = document.getElementById("categoria").value;
   const fecha = document.getElementById("fecha").value;
+  usuarioEmail= usuario.email
 
   if (!titulo || !monto || !categoria || !fecha || !descripcion) {
     return alert("Completa todos los campos");
@@ -168,7 +108,6 @@ async function agregarGasto() {
 
   const gasto = {
     userId: 1,
-    categoryId: categoria,
     title: titulo,
     description: descripcion,
     amount: monto,
@@ -268,7 +207,7 @@ function cancelarEdicion() {
 function actualizarGasto() {
   const titulo = document.getElementById("titulo").value;
   const descripcion = document.getElementById("descripcion").value;
-  const monto = parseFloat(document.getElementById("monto").value);
+  const monto = parseFloat(document.getElementById("monto")).value;
   const fecha = document.getElementById("fecha").value;
   const categoria = document.getElementById("categoria").value;
 
@@ -415,7 +354,7 @@ function Tabla(lista) {
     tr.innerHTML = `
       <td>${gasto.titulo}</td>
       <td>${gasto.categoria}</td>
-      <td>$${Number(gasto.monto)}</td>
+      <td>$${Number(gasto.monto).toLocaleString('es-CO',{minimumFractionDigits:2})}</td>
       <td>${new Date(gasto.fecha).toLocaleDateString('es-CO')}</td>
       <td>
         <button onclick="iniciarEdicion(${gasto.id})" class="btnEditar">Editar</button>

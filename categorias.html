@@ -2,10 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Gestión de Categorías</title>
-  <link rel="stylesheet" href="menu.html">
+  <title>Gestion de Categorias</title>
   <style>
-   body {
+body {
 
       font-family: Arial, sans-serif;
       padding: 0px;
@@ -14,44 +13,67 @@
       position: relative;
     }
 
-    h2 {
+    h1 {
       text-align: center;
     }
 
-    .meses {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 20px 0;
+ 
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 10;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.5);
     }
-
-    .meses button {
-      margin: 5px;
-      padding: 10px 15px;
-      border: none;
+ 
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
       border-radius: 8px;
-      background-color: #eee;
+      width: 300px;
+      position: relative;
+    }
+ 
+    .close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 18px;
       cursor: pointer;
-      transition: 0.3s;
     }
-
-    .meses button.activo {
-      background-color: #4CAF50;
-      color: white;
-    }
-
-    .formulario,
-    .filtros {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin: 20px 0;
-    }
-
-    
-
+ 
     table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+ 
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+ 
+    th, td {
+      padding: 8px;
+      text-align: left;
+    }
+ 
+    button {
+      margin-right: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+ 
+    #mensajeCategoria {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+     table {
       width: 100%;
       border-collapse: collapse;
       margin-top: 20px;
@@ -67,261 +89,43 @@
     th {
       background-color: #f9f9f9;
     }
-
-    .modal,
-    .modalGastos {
-
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-      margin: 0;
-      padding: 0;
-      display: none;
-
-
+    .modal-borde{
+        
+      border-radius: 10px;
+      padding: 20px;
+      border: 1px solid red;
+      
     }
-
-    .modal .overlay {
-
-      width: 100%;
-      height: 100%;
-      background-color: rgba(13, 14, 14, 0.493);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      top: 5%;
-      left: 50%;
-   
-    }
-
-
-    .modal .overlay .contentModal {
-      width: 30%;
-      height: 20%;
-      border: solid red;
-      background-color: rgb(243, 240, 240);
-    }
-
-   
-
-    .btnModal {
-      float: right;
-      border: none;
-      color: white;
-      background-color: red;
-      width: 40px;
-      height: 40px;
-      font-size: 20px;
-      font-weight: 700;
-    }
-
-   
-
-    form {
-      display: flex !important;
-      justify-self: center;
-      align-items: center;
-      flex-direction: column;
-      gap: 1rem;
-      width: 100%;
-      height: 100%;
-    }
-
-    form>button {
-      width: 150px;
-      height: 40px;
-      border-radius: 8px;
-      border: none;
-      background-color: darkcyan;
-      color: #060606;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem;
-    }
-    .modal{
-        display: none;
-        position: filex;
-        z-index: 1000;
-        left: 0%;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0,5);
-
-    }
-    .modal-container{
-        background-color: #fff;
-        margin: 10% auto;
-        padding: 20px;
-        border-radius: 10px;
-        width: 300px;
-        box-shadow: 0 0 10px rgba(0,0,0,0,3);
-    }
-
-    .cerrar{
-        color: red;
-        float: right;
-        font-size: 24px;
-        cursor: pointer;
-    }
-    .modalEditarCategoria {
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  border-radius: 10px;
-  width: 300px;
-}
-.modals{
-      position:fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgb(0,0,0,);  
-    }
-
-    /* modal de edtitar categorias */
-  /* Fondo oscuro detrás del modal */
-  .modal {
-    display: none; /* Oculto por defecto */
-    position: fixed;
-    z-index: 1000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0, 0, 0, 0.5);
-  }
- 
-  /* Contenido del modal */
-  .modal-content {
-    background-color: #fff;
-    margin: 10% auto;
-    padding: 20px;
-    border-radius: 8px;
-    width: 80%;
-    max-width: 500px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    position: relative;
-  }
- 
-  /* Botón cerrar (X) */
-  .close {
-    color: #aaa;
-    font-size: 24px;
-    font-weight: bold;
-    position: absolute;
-    top: 10px;
-    right: 20px;
-    cursor: pointer;
-  }
- 
-  .close:hover {
-    color: red;
-  }
-
+    
   </style>
 </head>
 <body>
-<!DOCTYPE html>
-<html lang="es">
 
-<head>
-  <meta charset="UTF-8" />
-  <title>Categorias</title>
-  
-  
-    
-  
-</head>
-
-<body>
+  <!-- Modal de Agregar Categorias y Editar Categorias -->
+ <br><br><br>
   <center><img src="logo.png" width="80" height="100px" alt="JHJ"></center>
-  <h2>Categorias</h2>
-<button id="btnOpenModal">Nueva categoria</button>
-  
-  <a href="gastosMes.html" style="float: right;">Volver</a>
-  <!-- Botones de meses -->
-    <div id="mensajeError"
-    style="display:none; color: white; background-color: red; padding: 10px; margin: 10px 0; border-radius: 5px;">
-  </div>
-   
-  <div class="meses" id="mesesContainer"></div>
-
-  
+  <h1>Gestion de Categorias</h1>
+  <button id="btnOpenModal">Agregar Categoria</button>
+ <br><br><a href="gastosMes.html" style="float: right;">Volver</a>
 
 
-  <!-- Tabla de gastos -->
-  <table>
+  <!-- Modal de Agreagar Categoria  -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-borde">
+      <button id="closeModalBtn" class="close">X</button>
+      <h2 id="tituloModal">Agregar Categoria</h2>
+      
+      <input type="text" id="nuevaCategoria" placeholder="Nombre de la categoria" />
+      <p id="mensajeCategoria"></p>
  
-    <tbody id="tablaGastos"></tbody>
-  </table>
-  <div class="modal">
-
-    <div class="overlay">
-      <div class="contentModal"><button class="btnModal" id="closeModal">x</button>
-
-        <div class="content">
-          <form>
-            <h3>Agregar nueva categoria</h3>
-            <input type="text" id="nuevaCategoria" placeholder="Nombre de la categoria" />
-            <button id="btnCategoria" onclick="agregarCategoria()">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                fill="#1f1f1f">
-                <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" />
-              </svg>
-              <p>
-                Enviar
-              </p>
-            </button>
-            <p id="mensajeCategoria" style="color: green;"></p>
-          </form>
-        </div>
-      </div>
+      <button id="btnAgregarCategoria">Agregar Categoria</button>
+      <button id="btnGuardarCategoria" style="display: none;">Guardar Cambios</button>
     </div>
   </div>
-
-
-
-
-  <!-- Modal Gastos  -->
-
-  <div class="modalGastos">
-    <div class="overlay">
-      <div class="contentGasto"><button class="btnModal" id="closeModalGastos">x</button>
-        <div class="content">
-
-          <!-- Formulario de gastos-->
-          <div class="formulario">
-            <h2 id="tituloModal">AGREGAR GASTOS</h2>
-            <input type="text" id="titulo" placeholder="Titulo">
-            <input type="text" id="descripcion" placeholder="Descripcion">
-            <input type="number" id="monto" placeholder="Monto">
-            <select id="categoria">
-              <option value="">Categoria</option>
-              
-            </select>
-            <input type="date" id="fecha">
-            <!-- Boton para agregar un gasto nuevo -->
-            <button id="btnAgregar" onclick="agregarGasto(event)">Enviar</button>
- 
-
-
-
-          </div>
-
-
-        </div>
-
-
-      </div>
-    </div>
   </div>
+ 
+  <!-- Tabla -->
   <table>
     <thead>
       <tr>
@@ -330,80 +134,11 @@
         <th>Acciones</th>
       </tr>
     </thead>
-    <tbody id="tablaCategoria">
-     
-    </tbody>
+    <tbody id="tablaCategoria"></tbody>
   </table>
-
-  <!-- Botón para abrir el modal -->
-<button id  =""><H1>AGREGAR CATEGORIA</H1></button>
- <button id=""style="display: none;" >Nueva Categoria</button>
-<!-- Modal -->
-<div id="myModal" class="modal">
-<div class="modal-content">
-<button id="closeModalBtn" class="close">&times;</button>
-<h2>Editar Categoria</h2>
-<label for="categoria">Categoria</label>
- <input type="text" id="categoria" placeholder="categoria">
- <button onclick="actualizarCategoria()">Enviar</button>
-
-</div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
- <!-- <div class="modals">
-
-    <div class="overlay">
-      <div class="contentModal"><button class="btnModals" id="closeModal">x</button>
-        <span class="cerrarr" id="cerrarModalEditar">&times;</span>
-        <div class="content">
-          <form>
-            <h3>Editar Categoria</h3>
-            <input type="hidden" id="editarCategoriaId">
-            <input type="text" id="editarCategoriaId" placeholder="Nombre de la categoria" />
-            <button id="btnCategoria" onclick="agregarCategoria()">
-              <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px"
-                fill="#1f1f1f">
-                <path d="M120-160v-640l760 320-760 320Zm80-120 474-200-474-200v140l240 60-240 60v140Zm0 0v-400 400Z" />
-              </svg>
-              <p>
-                Guardar
-              </p>
-            </button>
-            <p id="mensajeCategoria" style="color: green;"></p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
-   <!-- <button id="btnAbrirModalEditar">x</button>
-  <div id="editarModalCategoria" class="modal">
-       <div class="overlay"> 
-    <div id="modal-contenido">
-      <span class="cerrarr" id="cerrarModalEditar">&times;</span>
-      <h3>Editar Categoria</h3>
-      <form id="formEditarCategoria">
-        <label for="inputCategoria">Nombre de la Categoria</label>
-        <input type="text" id="inputCategoria" name="categoria"required>
-        <br><br>
-        <button type="submit">Guardar Cambios</button>
-      </form>
-     </div>
-    </div>
-    </div> -->
  
+  <!-- Tu script JS debe ir después de todo el HTML -->
   <script src="categorias.js"></script>
-  
+ 
 </body>
 </html>
- 

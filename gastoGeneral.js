@@ -1,9 +1,10 @@
 let gastos = [];
-
+// obteniendo los gasto desde la api 
 function obtenerGastosDesdeAPI() {
 fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses")
     .then(res => res.json())
     .then(data => {
+      
 gastos = data.map(g => ({
 id: g.id,
         titulo: g.titulo || g.title || "Sin titulo",
@@ -34,7 +35,7 @@ function aplicarFiltros() {
  
   renderizarTabla(filtrados);
 }
- 
+//  esta funcion es para que me muestre lo que tengo en la tabla
 function renderizarTabla(lista) {
   const tbody = document.getElementById("tablaGastos");
   tbody.innerHTML = "";
@@ -62,8 +63,7 @@ function renderizarTabla(lista) {
     tbody.appendChild(fila);
   });
 }
- 
-// Puedes agregar editarGasto y eliminarGasto si lo deseas
+
  
  
  

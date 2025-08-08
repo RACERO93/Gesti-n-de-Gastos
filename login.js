@@ -36,10 +36,13 @@ function iniciarSesion(correo, contraseña) {
       
      usuario = usuario[0];
      console.log(usuario);
-//      if (!correo || !contraseña) {
-//   alert("Debes ingresar correo y contraseña");
-//   return;
-// }
+
+
+     if (!correo || !contraseña) {
+  alert("Debes ingresar correo y contraseña");
+  return;
+}
+
 
 
       if (usuario) {

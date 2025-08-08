@@ -4,7 +4,7 @@ function obtenerGastosDesdeAPI() {
   fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses")
     .then(res => res.json())
     .then(data => {
-      // Filtrar solo gastos válidos (con monto numérico y fecha válida)
+      // Filtrar solo gastos validos (con monto numrico y fecha valida)
       gastos = data.filter(g => !isNaN(parseFloat(g.monto)) && g.fecha);
       actualizarDashboard(gastos);
     })
@@ -27,9 +27,9 @@ function actualizarDashboard(gastos) {
   const totalGeneral = gastos.reduce((acc, g) => acc + parseFloat(g.monto), 0);
 
   // Mostrar en HTML
-  document.querySelector("#gastoAlto span").textContent = `$${parseFloat(gastoMasAlto.monto).toFixed(2)}`;
-  document.querySelector("#gastoBajo span").textContent = `$${parseFloat(gastoMasBajo.monto).toFixed(2)}`;
-  document.querySelector("#totalMes span").textContent = `$${totalGeneral.toFixed(2)}`;
+  document.querySelector("#gastoAlto span").textContent = `$${parseFloat(gastoMasAlto.monto).toLocaleString('es-CO', {minimumFractionDigits:2})}`;
+  document.querySelector("#gastoBajo span").textContent = `$${parseFloat(gastoMasBajo.monto).toLocaleString('es-CO', {minimumFractionDigits:2})}`;
+  document.querySelector("#totalMes span").textContent = `$${totalGeneral.toLocaleString('es-CO',{minimumFractionDigits:2})}`;
 }
 
 
