@@ -17,6 +17,21 @@ document.getElementById('perfilForm').addEventListener('submit', function(e) {
   perfil(id, nombre, correo, contraseña);
 });
 
+document.addEventListener("DOMContentLoaded", function(){
+  const usuario = JSON.parse(localStorage.getItem("usuario"));
+
+  if(!usuario){
+    alert("No se encontro informcion del usuario");
+    window.location.href = "inicioSesion.html";
+    return;
+  }
+  // Trae los dastos de los usuario
+  document.getElementById("nombre").value = usuario.name || "";
+  document.getElementById("correo").value = usuario.email || "";
+
+  document.getElementById("contraseña").value = "";
+});
+
 function perfil(id, nombre, correo, contraseña) {
   fetch(`https://demos.booksandbooksdigital.com.co/practicante/backend/users/${id}`, {
     method: "PATCH",

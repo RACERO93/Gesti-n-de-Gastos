@@ -30,7 +30,9 @@ let categoriaEditandoId = null;
  document.getElementById("btnGuardarCategoria").style.display = "inline-block";
  document.getElementById("tituloModal").textContent = "Editar Categoria";
  document.getElementById("myModal").style.display = "block";
+ 
  }
+ 
 
  async function agregarCategoria() {
  const name = document.getElementById("nuevaCategoria").value.trim();
@@ -50,7 +52,9 @@ let categoriaEditandoId = null;
  mensaje.textContent = "Categoria agregada";
  mensaje.style.color = "green";
  document.getElementById("nuevaCategoria").value = "";
+ 
  mostrarCategoriasEnTabla();
+ alert("Categoria exitosa")
  cerrarModal();
 } catch (error) {
  mensaje.textContent = "Error al agregar";
@@ -79,6 +83,7 @@ let categoriaEditandoId = null;
        categoriaEditandoId = null;
        document.getElementById("nuevaCategoria").value = "";
        mostrarCategoriasEnTabla();
+       alert("Categoria Actualizda")
        cerrarModal();
       } catch (error) {
     mensaje.textContent = "Error al actualizar";

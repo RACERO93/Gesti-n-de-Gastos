@@ -12,6 +12,20 @@ const mesesContainer = document.getElementById("mesesContainer");
 const tbody = document.getElementById("tablaGastos");
 const mensajeError = document.getElementById("mensajeError");
 
+//VALIDAR SESION
+const usuario = JSON.parse(localStorage.getItem("usuario"));
+if (!usuario){
+  mensajeError.style.display = "block";
+  mensajeError.style.backgroundColor = "red";
+  mensajeError.textContent = "no hay sesion iniciada";
+  
+  setTimeout(()=>{
+    window.location.href = "iniciarSesion.html";
+  }, 2000);
+
+}  else {
+    mensajeError.style.display = "none"
+  }
 // Mostrar botones de meses
 tbody.innerHTML = "";
 meses.forEach((mes, i) => {
@@ -44,19 +58,18 @@ function normalizarGasto(gasto) {
 
 async function obtenerGastosDesdeAPI() {
  mensajeError.style.display = "none";
+ const usuario = JSON.parse(localStorage.getItem("usuario"));
+ if (!usuario){
+  alert(" No hay usuario agregado")
+return;
+}
 try {
     const res = await fetch("https://demos.booksandbooksdigital.com.co/practicante/backend/expenses");
     if (!res.ok) throw new Error("Error al obtener gastos");
     const datos = await res.json();
 
-    gastos = datos.map(normalizarGasto);
-
-
-//  if (!gastos.length) {
-//  mensajeError.textContent = "No hay gastos disponibles";
-//  mensajeError.style.display = "block";
-//  return;
-//  }
+    gastos = datos.map(normalizarGasto)
+    .filter(g => g.userId === usuario.id);
 
  filtrarGastos();
 } catch (err) {
@@ -88,6 +101,31 @@ function limpiarFiltros() {
   document.getElementById("filtroMin").value = "";
   document.getElementById("filtroMax").value = "";
   filtrarGastos();
+
+}
+// Validar formulario de Gasto
+function validarFormularioGasto (){
+  let valido = true;
+}
+document.querySelector(".error").forEach(e.textContent = "");
+
+const titulo = document.getElementById("titulo").value.trim();
+const descripcion = document.getElementById("descripcion").value.trim();
+const monto = parseInt(document.getElementById("monto").value);
+const categoria = document.getElementById("categoria").value;
+const fecha = document.getElementById("fecha").value;
+
+if(!titulo){
+  document.getElementById("errorTitulo").textContent = "El titulo es obligatorio"
+  valido=false;
+}
+if (!descropciom){
+  document.getElementById("errorDescripcion").textContent = "la descripcion  es obligatorio"
+  valido = false
+}
+if(isNaN(monto) || monto <= 0){
+   document.getElementById("errorMonto").textContent = "el monto debe ser mayor que 0"
+   valido = false;
 }
  
 async function agregarGasto() {
@@ -98,20 +136,22 @@ async function agregarGasto() {
   const titulo = document.getElementById("titulo").value;
   const descripcion = document.getElementById("descripcion").value;
   const monto = parseFloat(document.getElementById("monto").value);
-  const categoria = document.getElementById("categoria").value;
+  const categoria = parseInt(document.getElementById("categoria").value);
   const fecha = document.getElementById("fecha").value;
-  usuarioEmail= usuario.email
+  // usuarioEmail= usuario.email
 
   if (!titulo || !monto || !categoria || !fecha || !descripcion) {
     return alert("Completa todos los campos");
   }
 
   const gasto = {
-    userId: 1,
+    userId: usuario.id,
     title: titulo,
     description: descripcion,
     amount: monto,
-    date: fecha
+    date: fecha,
+    categoryId:categoria
+
   };
 
   try {
@@ -135,15 +175,15 @@ async function agregarGasto() {
     document.getElementById("monto").value = "";
     document.getElementById("categoria").value = "";
     document.getElementById("fecha").value = "";
+    
   } catch (error) {
     console.error("Error al agregar gasto:", error);
     alert("No se pudo agregar el gasto.");
   }
-  
-
-  
-
 }
+    
+
+
 
 let gastoEditandoId = null;
 
@@ -155,21 +195,26 @@ function iniciarEdicion(id) {
       // click para abrir modal al btn de abrir modal
         document.getElementById("btnOpenModalGastos").click()
       // document.getElementById("btnOpenModalGastos").click()
+      
+      
+      // Llama los datos modal Editar 
 
       document.getElementById("titulo").value = data.titulo || data.title;
       document.getElementById("descripcion").value = data.descripcion || data.description;
       document.getElementById("monto").value = data.monto || data.amount;
       document.getElementById("fecha").value = data.fecha || data.Date;
-      
-      gastoEditandoId = id;
+      document.getElementById("categoria").value = data.categoryId;
 
 
       document.getElementById("tituloModal").innerText = "Editar Gasto"
        document.getElementById("btnAgregar").style.display = "none";
       document.getElementById("btnGuardar").style.display = "inline-block";
-      document.getElementById("btnCancelar").style.display = "inline-block";
+      // document.getElementById("btnCancelar").style.display = "inline-block";
          
      
+      
+
+      gastoEditandoId = id;
 
     })
     
@@ -194,7 +239,7 @@ function cancelarEdicion() {
   document.getElementById("btnAgregar").style.display = "inline-block";
   document.getElementById("btnGuardar").style.display = "inlene-block";
   document.getElementById("btnCancelar").style.display = "none";
- document.getElementById("modalEditar").style.display="inlne-block";  
+ document.getElementById("modalEditar").style.display = "inlne-block";  
 
   // Resetear ID de edición
   gastoEditandoId = null;
@@ -209,7 +254,7 @@ function actualizarGasto() {
   const descripcion = document.getElementById("descripcion").value;
   const monto = parseFloat(document.getElementById("monto")).value;
   const fecha = document.getElementById("fecha").value;
-  const categoria = document.getElementById("categoria").value;
+  const categoria = parseInt(document.getElementById("categoria").value);
 
   const gastoActualizado = {
     title: titulo,
@@ -231,6 +276,7 @@ function actualizarGasto() {
     .then(() => {
       alert("Gasto actualizado correctamente");
 
+      
       // Limpiar formulario y restaurar botones
       document.getElementById("btnAgregar").style.display = "inline-block";
       document.getElementById("btnGuardar").style.display = "none";
@@ -463,13 +509,13 @@ function mostrarCategorias() {
     categoriaAPI.map((dato)=>{       
       const option1 = document.createElement("option")
     
-      option1.id= dato.id
-      option1.text = dato.name
+      option1.value= dato.id
+      option1.textContent = dato.name
       categoria.appendChild(option1)
 
       const option2 = document.createElement("option")
-      option2.id= dato.id
-      option2.text = dato.name
+      option2.value= dato.id
+      option2.textContent = dato.name
       categoriaFiltro.appendChild(option2)
       
     })
@@ -480,5 +526,9 @@ cargarCategoria();
 setTimeout(() => {
   mostrarCategorias(); 
 }, 200);
+
+
+
+    
 
 
